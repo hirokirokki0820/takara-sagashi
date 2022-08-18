@@ -3,7 +3,9 @@ class User < ApplicationRecord
   before_create :set_user_id
 
   # ユーザー名のバリデーション
-  validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 30 }, if: :require_validation?
+  VALID_NAME_REGEX = /\A[a-zA-Z0-9]+\z/
+  validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 30 },
+  format: { with: VALID_NAME_REGEX }, if: :require_validation?
 
   # パスワードのバリデーション
   has_secure_password validations: false
@@ -16,6 +18,10 @@ class User < ApplicationRecord
                       length: { minimum: 6 }, if: :require_validation?
 
 
+  # ゲストユーザーの有効期限が切れている場合はtrueを返す
+  # def guest_user_expired?
+  #   updated_at < 7.days.ago
+  # end
 
   private
     # ゲストユーザーのみバリデーションを解除（Name, Password）
