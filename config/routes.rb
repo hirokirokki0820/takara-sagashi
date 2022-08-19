@@ -5,13 +5,9 @@ Rails.application.routes.draw do
   get "login", to: "sessions#new"
   post "login", to: "sessions#create"
   delete "logout", to: "sessions#destroy"
-  # post "guest", to: "guest_users#create"
-  # delete "guest_logout", to "guest_users#destroy"
+  get "activation_reset", to: "posts#activation_reset"
   resources :users, except: [:new]
-  resources :posts
-  # resources :guest_users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :posts do
+    resources :items
+  end
 end
