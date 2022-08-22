@@ -4,8 +4,8 @@
   <% @post.items.each do |item| %>
   <div class="mb-3">
     <ul>
-      <%#= link_to item.name, edit_post_item_path(item.post_id, item.id) %>
       <li><%= link_to item.name, post_item_path(item.post_id, item.id) %></li>
+      <!-- <li><%= qrcode post_item_path(item.post_id, item.id), 3 %></li> -->
     </ul>
   </div>
 <% end %>
@@ -14,8 +14,12 @@
 >> <%= link_to "アイテムを追加する", new_post_item_path(@post) %>
 </div>
 
+<div class="mb-3">
+>> <%= link_to "QRコードを表示・印刷する", show_qrcodes_post_path(@post) %>
+</div>
+
 <div class="mb-5">
->> <%= link_to "無効化をリセットする", activation_reset_path(@post) %>
+<%= link_to "景品の取得をリセットする", activation_reset_post_path(@post) %>
 </div>
 
 <div>
