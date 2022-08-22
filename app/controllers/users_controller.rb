@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in @user
-      redirect_to user_url(@user), notice: "User was successfully created."
+      redirect_to user_url(@user), notice: "新規ユーザーが作成されました"
     else
       render :new, status: :unprocessable_entity
     end
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1 or /users/1.json
   def update
     if @user.update(user_params)
-      redirect_to user_url(@user), notice: "User was successfully updated."
+      redirect_to user_url(@user), notice: "ユーザー情報が更新されました"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   # DELETE /users/1 or /users/1.json
   def destroy
     @user.destroy
-    redirect_to root_path, notice: "User was successfully destroyed.", status: :see_other
+    redirect_to root_path, notice: "アカウントが削除されました", status: :see_other
   end
 
   def guest_login
