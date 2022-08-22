@@ -56,6 +56,12 @@ gem "rqrcode"
 gem "rqrcode_png"
 gem "chunky_png"
 
+# ページネーション用のgem
+gem "kaminari"
+
+# 検索機能のgem
+gem "ransack"
+
 group :development, :test do
   gem "sqlite3", "~> 1.4"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -78,4 +84,8 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+end
+
+group :production do
+  gem "pg"
 end

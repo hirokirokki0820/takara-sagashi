@@ -1,13 +1,14 @@
 <!-- ナビゲーションメニュー -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
-    <%= link_to "Sample App", (logged_in? ? current_user : root_path), class: "navbar-brand" %>
+    <%#= link_to "QRコード de 宝探しゲーム", (logged_in? ? current_user : root_path), class: "navbar-brand" %>
+    <%= link_to "QR Treasure Hunt", (logged_in? ? current_user : root_path), class: "navbar-brand" %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <% if logged_in? %>
           <li class="nav-item">
-            <%= link_to "新規投稿", new_post_path, class: "nav-link" %>
+            <%= link_to "新規イベント作成", new_post_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
             <%= link_to "ユーザー", user_path(current_user), class: "nav-link" %>

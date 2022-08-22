@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   # DELETE /users/1 or /users/1.json
   def destroy
     @user.destroy
-    redirect_to root_path, notice: "User was successfully destroyed."
+    redirect_to root_path, notice: "User was successfully destroyed.", status: :see_other
   end
 
   def guest_login
