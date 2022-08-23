@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root "home#index"
+  root "home#top"
+  get "host_user", to: "home#host_user"
   get "signup", to: "users#new"
   get "guest_login", to: "users#guest_login"
   get "login", to: "sessions#new"

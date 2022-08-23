@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :require_verified_account, only: %i[ edit update destroy ]
   before_action :require_same_user, only: %i[ show edit update destroy ]
   before_action :require_user, only: %i[ index ]
-
+  before_action :user_got_items, only: %i[ show ]
 
   # GET /users or /users.json
   def index
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
     else
       user = User.guest_login
       log_in user
-      redirect_to user, notice: "ゲストとしてログインしました"
+      redirect_to user, notice: "イベントに参加しました"
     end
   end
 
@@ -83,5 +83,10 @@ class UsersController < ApplicationController
         flash[:alert] = "ご自身以外のアカウントの閲覧・編集はできません"
         redirect_to root_path
       end
+    end
+
+    # 参加者が獲得したアイテム一覧を返す
+    def user_got_items
+      @got_items = Item.where(item_got_user: current_user.id)
     end
 end
