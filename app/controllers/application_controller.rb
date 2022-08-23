@@ -19,7 +19,13 @@ class ApplicationController < ActionController::Base
 
   def require_user
     if !logged_in?
-      redirect_to root_path
+      if Rails.env.production?
+        # 本番環境のみの処理
+        redirect_to "https://qr-treasure-hunt.herokuapp.com", alert: "ログインしてください"
+      elsif Rails.env.development?
+        # 開発環境のみの処理
+        redirect_to root_path, alert: "ログインしてください"
+      end
     end
   end
 
