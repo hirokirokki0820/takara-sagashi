@@ -12,7 +12,7 @@ module ApplicationHelper
       # 開発環境のみの処理
       qrcode = RQRCode::QRCode.new(url)
     end
-    return ChunkyPNG::Image.from_datastream(qrcode.as_png.resize(150,150).to_datastream).to_data_url
+    return ChunkyPNG::Image.from_datastream(qrcode.as_png.resize(200,200).to_datastream).to_data_url
   end
 
   # def qrcode(url, size)
