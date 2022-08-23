@@ -9,29 +9,23 @@
 
 <hr>
 
-<div class="text-center">
-  <h2 class="mt-3">獲得した景品</h2>
-  <div class="card shadow mt-3 mb-4">
-    <div class="card-header">
-      <%= icon_with_text("table", "一覧") %>
-    </div>
 
+<h2 class="mt-3 text-center">獲得した景品</h2>
+<div class="card shadow mt-3 mb-4">
+  <div class="card-header">
+    <%= icon_with_text("table", "一覧") %>
+  </div>
+  <div class="text-center">
     <div class="card-body mx-3">
       <div class="row py-2">
-        <div class="col-6 mt-auto fw-bold">
-          景品No.
-        </div>
-        <div class="col-6 mt-auto fw-bold">
+        <div class="col-12 mt-auto fw-bold">
           景品名
         </div>
         <hr class="mt-2">
       </div>
       <div class="row">
-        <% @got_items.each_with_index do |item, index| %>
-          <div class="col-6 mt-auto">
-            <%= index + 1 %>
-          </div>
-          <div class="col-6 mt-auto">
+        <% @got_items.each do |item| %>
+          <div class="col-12 mt-auto">
             <%= link_to item.name, post_item_path(item.post_id, item.id) %>
           </div>
           <hr class="mt-2" style="border: 1px solid #ccc">
@@ -40,6 +34,7 @@
     </div>
   </div>
 </div>
+
 
 <div id="qrCodeReader" class="mb-4 text-center">
   <a href="" class="btn__basic__l btn__green" id="qrCodeAppLink"><%= icon_with_text("qr-code", "QRコードリーダーを起動する") %></a>
