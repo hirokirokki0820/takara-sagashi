@@ -49,9 +49,10 @@
           <h3 class="fw-bold item__name__gold"><%= @item.name %></h3>
         </div>
         <p>が当たりました！！</p>
-        <span class="fw-bold"> </span>
-        <p class="py-2 px-3 mt-1 text-bg-light d-inline-block"><%= icon_with_text("qr-code", "") %><span class=" fw-bold"><%= @item.id %></span></p>
-
+        <div class="d-inline-block text-start">
+          <p class="py-2 px-3 mt-1 text-bg-light"><%= icon_with_text("qr-code", "アイテムID: ") %><span class=" fw-bold text-danger"><%= @item.id %></span></p>
+          <p class="py-2 px-3 mt-1 text-bg-light"><%= icon_with_text("person-circle", "獲得者ID: ") %><span class=" fw-bold text-danger"><%= @item.item_got_user %></span></p>
+        </div>
       <% end %>
     <% end %>
   </div>
