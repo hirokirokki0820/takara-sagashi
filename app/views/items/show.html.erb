@@ -24,9 +24,6 @@
   <div class="mb-3">
     <%= link_to icon_with_text("pencil-square", "アイテムを編集する"), edit_post_item_path(@item.post_id, @item.id), class: "btn btn-primary" %>
   </div>
-  <div class="mb-5">
-    <%= link_to icon_with_text("trash", "アイテムを削除する"), post_item_path(@item.post_id, @item.id), class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？"} %>
-  </div>
 
 <% else %>
   <!-- 参加者用の表示画面 -->

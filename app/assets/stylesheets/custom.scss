@@ -7,7 +7,19 @@ body {
   padding-top: 55px;
 }
 
-/****** 必須項目のラベルに「*」マークを付ける ******/
+h1 {
+  margin-bottom: 20px;
+}
+
+/****** フォームのスタイル ******/
+// エラー時の入力フォームのスタイリング
+.validation_errors {
+  input {
+    @extend .is-invalid;
+  }
+}
+
+//入力フォーム必須項目のラベルに「*」マークを付ける
 label.required:after{
   content:" *";
   color: red;

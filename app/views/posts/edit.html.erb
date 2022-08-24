@@ -1,12 +1,3 @@
 <h1>イベントの編集</h1>
 
 <%= render "form", post: @post %>
-
-<div class="mb-5">
-  <%= link_to "キャンセル", current_user, class: "btn btn-secondary" %>
-</div>
-<hr>
-
-<div class="mb-5">
-  <%= link_to icon_with_text("trash", "イベントを削除する"), @post, class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？"} %>
-</div>
