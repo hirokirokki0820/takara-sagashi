@@ -2,10 +2,10 @@ class ItemsController < ApplicationController
   before_action :set_item, only: %i[ show edit update destroy activate_item ]
   before_action :set_post
   before_action :require_same_user, only: %i[ edit update destroy ]
-  before_action :set_item_got_user, only: %i[ show ]
-  # after_action :item_deactivate, only: %i[ show ]
+  before_action :set_item_got_user, only: %i[ show ], if: proc { !host_user? }
   before_action :require_user, only: %i[ index show ]
   before_action :items_index, only: %i[ show activate_item ]
+
 
   # GET /items or /items.json
   def index
@@ -42,7 +42,7 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1 or /items/1.json
   def update
     if @item.update(item_params)
-      redirect_to @item.post, notice: "アイテムが更新されました"
+      redirect_to post_item_path(@item.post_id, @item.id), notice: "アイテムが更新されました"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -95,10 +95,12 @@ class ItemsController < ApplicationController
       end
     end
 
-    # 一度アクセスしたら activated を無効化する
-    def item_deactivate
-      if @item.activated?
-        @item.update_attribute(:activated, false)
+    # ログインユーザーがイベント作成者ならtrueを返す
+    def host_user?
+      if @item.post.user == current_user
+        return true
+      else
+        return false
       end
     end
 

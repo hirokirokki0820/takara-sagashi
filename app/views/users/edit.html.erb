@@ -2,11 +2,11 @@
 
 <%= render "form", user: @user %>
 
-<div class="mt-2">
+<div class="mb-5">
   <%= link_to "キャンセル", current_user, class: "btn btn-secondary" %>
 </div>
 
-<hr class="mt-5">
-<div class="text-center">
-  <%= link_to icon_with_text("trash", "アカウントを削除する"), @user, class: "btn__basic__l btn__red", data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？"} %>
+<hr>
+<div class="mb-5">
+  <%= link_to icon_with_text("trash", "アカウントを削除する"), @user, class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？"} %>
 </div>

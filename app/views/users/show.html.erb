@@ -41,6 +41,19 @@
   <!--<input id="camera" type="file" name="image" accept="image/*" capture>-->
 </div>
 
+<script type="text/javascript">
+  var qrCodeReader = document.querySelector("#qrCodeReader");
+  var qrCodeAppLink = document.querySelector("#qrCodeAppLink");
+  // iPhone or iPad
+  if ( navigator.userAgent.indexOf('iPhone') > 0 || navigator.userAgent.indexOf('iPad') > 0 ){
+    // qrCodeAppLink.href = "qrcode://";
+    qrCodeAppLink.href = "https://apps.apple.com/jp/app/qr%E3%82%B3%E3%83%BC%E3%83%89%E3%83%AA%E3%83%BC%E3%83%80%E3%83%BC-%E3%82%B7%E3%83%B3%E3%83%97%E3%83%AB%E3%81%AAqr%E3%82%B3%E3%83%BC%E3%83%89%E3%83%AA%E3%83%BC%E3%83%80%E3%83%BC%E3%82%A2%E3%83%97%E3%83%AA/id1080558159?itsct=apps_box_link&itscg=30200";
+  // Android
+  } else if( navigator.userAgent.indexOf('Android') > 0 ){
+    qrCodeAppLink.href = "https://play.google.com/store/apps/details?id=com.hopej.android.go";
+  }
+</script>
+
 <% else %>
 <!--- イベント主催者用の表示 --->
   <div class="mb-3">
@@ -93,20 +106,7 @@
   </div>
 
   <hr>
-  <div class="mb-3 text-center">
-    <%= link_to "ユーザー情報を編集する", edit_user_path(@user), class: "btn__basic__l"%>
+  <div class="mb-5 text-center">
+    <%= link_to icon_with_text("person-circle","ユーザー情報を編集する"), edit_user_path(@user), class: "btn__basic__m"%>
   </div>
 <% end %>
-
-<script type="text/javascript">
-var qrCodeReader = document.querySelector("#qrCodeReader");
-var qrCodeAppLink = document.querySelector("#qrCodeAppLink");
-// iPhone or iPad
-if ( navigator.userAgent.indexOf('iPhone') > 0 || navigator.userAgent.indexOf('iPad') > 0 ){
-  // qrCodeAppLink.href = "qrcode://";
-  qrCodeAppLink.href = "https://apps.apple.com/jp/app/qr%E3%82%B3%E3%83%BC%E3%83%89%E3%83%AA%E3%83%BC%E3%83%80%E3%83%BC-%E3%82%B7%E3%83%B3%E3%83%97%E3%83%AB%E3%81%AAqr%E3%82%B3%E3%83%BC%E3%83%89%E3%83%AA%E3%83%BC%E3%83%80%E3%83%BC%E3%82%A2%E3%83%97%E3%83%AA/id1080558159?itsct=apps_box_link&itscg=30200";
-// Android
-} else if( navigator.userAgent.indexOf('Android') > 0 ){
-  qrCodeAppLink.href = "https://play.google.com/store/apps/details?id=com.hopej.android.go";
-}
-</script>

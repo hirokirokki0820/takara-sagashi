@@ -5,7 +5,3 @@
 <div class="mb-5">
   <%= link_to "キャンセル", @post, class: "btn btn-secondary" %>
 </div>
-<hr>
-<div class="mb-5">
-  <%= link_to icon_with_text("trash", "アイテムを削除する"), post_item_path(@item.post_id, @item.id), class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？"} %>
-</div>

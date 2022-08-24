@@ -1,27 +1,61 @@
-<div class="mb-5 text-center">
-  <% if @item.lose == true %>
-    <div class="item__lose">
-      <h3 class="m-5">😭残念！！ハズレです。</h3>
-    </div>
-  <% else %>
-    <% if @item.item_got_user != current_user.id %>
+<% if @item.post.user == current_user %>
+  <!-- イベント作成者用の表示画面 -->
+  <div class="mb-3">
+    <%= link_to icon_with_text("box-arrow-in-left", "アイテム一覧に戻る"), @item.post, class: "" %>
+  </div>
+  <hr>
+  <h2 class="mb-4">アイテム詳細</h2>
+  <div class="mb-5">
+    <p><b>アイテム名:  </b><%= @item.name %></p>
+    <p><b>アイテム ID: </b><%= @item.id %></p>
+    <p><b>アイテム在庫:  </b>
+      <% if @item.item_got_user.nil? && !@item.lose? %>
+        <span class="text-success fw-bold"><%= icon("circle") %></span>
+      <% elsif @item.lose? %>
+        <span class="fw-bold"><%= icon("dash-lg") %></span>
+      <% else %>
+        <span class="text-danger fw-bold"><%#= icon("x-lg") %>❌</span>
+      <% end %>
+    </p>
+    <p><b>アイテム獲得者 ID:  </b><%= @item.item_got_user if !@item.item_got_user.nil? %></p>
+  </div>
+
+  <hr>
+  <div class="mb-3">
+    <%= link_to icon_with_text("pencil-square", "アイテムを編集する"), edit_post_item_path(@item.post_id, @item.id), class: "btn btn-primary" %>
+  </div>
+  <div class="mb-5">
+    <%= link_to icon_with_text("trash", "アイテムを削除する"), post_item_path(@item.post_id, @item.id), class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？"} %>
+  </div>
+
+<% else %>
+  <!-- 参加者用の表示画面 -->
+  <div class="mb-5 text-center">
+    <% if @item.lose == true %>
       <div class="item__lose">
-        <div class="m-5">
-          <h3>😭残念！！</h3>
-          <p>景品はすでに獲得されました。</p>
-        </div>
+        <h3 class="m-5">😭残念！！ハズレです。</h3>
       </div>
     <% else %>
-      <p>🎉おめでとうございます！！🎉</p>
-      <div class="mb-3">
-        <p><b>景品 ID: </b><%= @item.id %></p>
-        <h3 class="fw-bold item__name__gold"><%= @item.name %></h3>
-      </div>
-      <p>が当たりました！！</p>
-      <p>当画面を提示して景品と交換してください。</p>
+      <% if @item.item_got_user != current_user.id %>
+        <div class="item__lose">
+          <div class="m-5">
+            <h3>😭残念！！</h3>
+            <p>景品はすでに獲得されました。</p>
+          </div>
+        </div>
+      <% else %>
+        <p>🎉おめでとうございます！！🎉</p>
+        <div class="mb-3">
+          <h3 class="fw-bold item__name__gold"><%= @item.name %></h3>
+        </div>
+        <p>が当たりました！！</p>
+        <span class="fw-bold"> </span>
+        <p class="py-2 px-3 mt-1 text-bg-light d-inline-block"><%= icon_with_text("qr-code", "") %><span class=" fw-bold"><%= @item.id %></span></p>
+
+      <% end %>
     <% end %>
-  <% end %>
-</div>
-<div class="mb-3">
-  <%= link_to icon_with_text("box-arrow-in-left", "マイページに戻る"), current_user, class: "" %>
-</div>
+  </div>
+  <div class="mb-3">
+    <%= link_to icon_with_text("box-arrow-in-left", "マイページに戻る"), current_user, class: "" %>
+  </div>
+<% end %>
