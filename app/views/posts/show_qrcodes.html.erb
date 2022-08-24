@@ -6,16 +6,28 @@
   <p class="fw-bold text-danger">※倍率など細かな調整は印刷ダイアログにて行ってください。</p>
 </div>
 
-<div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3 mt-3">
-  <% @post.items.each_with_index do |item, index| %>
+  <% @post.items.each do |item| %>
+    <div class="d-inline-block text-center" style="border: 1px solid #ccc">
+      <%= image_tag qrcode_tag post_item_path(item.post_id, item.id) %>
+      <p style="font-size: 0.8em"><%= item.id %></p>
+    </div>
+  <% end %>
+
+<!--
+<div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-1 mt-3">
+  <% @post.items.each do |item| %>
+    <div class="d-inline">
+      <%= image_tag qrcode_tag post_item_path(item.post_id, item.id) %>
+      <p style="font-size: 0.8em"><%= item.id %></p>
+    </div>
+
     <div class="page col mb-5">
       <div class="p-3 border text-center">
-        <p>景品No.<%= index + 1 %></p>
-        <p><%#= item.name %></p>
         <%#= qrcode post_item_path(item.post_id, item.id), 100 %>
-        <%= image_tag qrcode_tag post_item_path(item.post_id, item.id) %>
-        <p class="mt-1" style="font-size: 0.6em"><%= item.id %></p>
+        <%#= image_tag qrcode_tag post_item_path(item.post_id, item.id) %>
+        <p style="font-size: 0.8em"><%#= item.id %></p>
       </div>
     </div>
   <% end %>
 </div>
+-->
