@@ -1,10 +1,10 @@
 @page {
   size: A4 portrait;
-  margin: 5mm;
+  margin: 10mm;
 }
 
 @media print{
-	.no_print{
+	.no_print, .navbar{
 		display: none;
 	}
 
@@ -14,11 +14,7 @@
     zoom: 0.8; /* なるべく多くのブラウザで切れないようにするため */
   }
 
-  .page{
-    page-break-after: always;
+  .pagebreak {
+    break-after: page;
   }
-  .page:last-child{
-    page-break-after: auto;
-  }
-
 }
