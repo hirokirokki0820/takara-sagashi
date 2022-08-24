@@ -6,9 +6,9 @@
   <hr>
   <h2 class="mb-4">アイテム詳細</h2>
   <div class="mb-5">
-    <p><b>アイテム名:  </b><%= @item.name %></p>
-    <p><b>アイテム ID: </b><%= @item.id %></p>
-    <p><b>アイテム在庫:  </b>
+    <p><b>品名:  </b><%= @item.name %></p>
+    <p><b>ID: </b><%= @item.id %></p>
+    <p><b>在庫:  </b>
       <% if @item.item_got_user.nil? && !@item.lose? %>
         <span class="text-success fw-bold"><%= icon("circle") %></span>
       <% elsif @item.lose? %>
@@ -17,7 +17,7 @@
         <span class="text-danger fw-bold"><%#= icon("x-lg") %>❌</span>
       <% end %>
     </p>
-    <p><b>アイテム獲得者 ID:  </b><%= @item.item_got_user if !@item.item_got_user.nil? %></p>
+    <p><b>獲得者 ID:  </b><%= @item.item_got_user if !@item.item_got_user.nil? %></p>
   </div>
 
   <hr>
@@ -50,7 +50,7 @@
         </div>
         <p>が当たりました！！</p>
         <div class="d-inline-block text-start">
-          <p class="py-2 px-3 mt-1 text-bg-light"><%= icon_with_text("qr-code", "アイテムID: ") %><span class=" fw-bold text-danger"><%= @item.id %></span></p>
+          <p class="py-2 px-3 mt-1 text-bg-light"><%= icon_with_text("qr-code", "ID: ") %><span class=" fw-bold text-danger"><%= @item.id %></span></p>
           <p class="py-2 px-3 mt-1 text-bg-light"><%= icon_with_text("person-circle", "獲得者ID: ") %><span class=" fw-bold text-danger"><%= @item.item_got_user %></span></p>
         </div>
       <% end %>
