@@ -80,7 +80,6 @@ class UsersController < ApplicationController
 
     def require_same_user
       if current_user != @user
-        flash[:alert] = "ご自身以外のアカウントの閲覧・編集はできません"
         redirect_to root_path
       end
     end

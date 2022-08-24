@@ -24,30 +24,27 @@
     %>
     </div>
     <div class="row py-2">
-      <div class="col-2 mt-auto fw-bold">
-        No.
+      <div class="col-5 mt-auto fw-bold">
+        ID
       </div>
       <div class="col-5 mt-auto fw-bold">
         景品名
       </div>
-      <div class="col-3 mt-auto fw-bold">
+      <div class="col-2 mt-auto fw-bold">
         状況
-      </div>
-      <div class="col-2 d-flex justify-content-end">
-
       </div>
       <hr class="mt-2">
     </div>
     <div class="row">
       <% @post.items.each_with_index do |item, index| %>
-        <div class="col-2 mt-auto">
-          <%= index + 1 %>
+        <div class="col-5 mt-auto">
+          <%= item.lose? ? icon("dash-lg") : item.id %>
         </div>
         <div class="col-5 mt-auto">
-          <%= link_to item.name, post_item_path(item.post_id, item.id) %>
+          <%= link_to item.name, edit_post_item_path(item.post_id, item.id) %>
           <%#= link_to item.name, post_item_path(item.post_id, item.id, activation_id: item.activation_id) %>
         </div>
-        <div class="col-3 mt-auto">
+        <div class="col-2 mt-auto">
           <% if item.item_got_user.nil? && !item.lose? %>
             <span class="text-success fw-bold"><%= icon("circle") %></span>
           <% elsif item.lose? %>
@@ -55,9 +52,6 @@
           <% else %>
             <span class="text-danger fw-bold"><%= icon("x") %></span>
           <% end %>
-        </div>
-        <div class="col-2 d-flex justify-content-end">
-          <%= link_to icon("trash"), post_item_path(item.post_id, item.id) , class: "text-danger fw-bold", data: { turbo_method: :delete} %>
         </div>
         <hr class="mt-2" style="border: 1px solid #ccc">
       <% end %>

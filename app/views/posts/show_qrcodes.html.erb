@@ -6,18 +6,21 @@
   <p class="fw-bold text-danger">※倍率など細かな調整は印刷ダイアログにて行ってください。</p>
 </div>
 
-  <% @post.items.each do |item| %>
-    <div class="d-inline-block text-center" style="border: 1px solid #ccc">
-      <%= image_tag qrcode_tag post_item_path(item.post_id, item.id) %>
-      <p style="font-size: 0.8em"><%= item.id %></p>
+<% @post.items.each do |item| %>
+  <div class="d-inline-block text-center" style="border: 1px solid #ccc">
+    <%#= image_tag qrcode_tag post_item_path(item.post_id, item.id) %>
+    <div class="p-3">
+      <%= qrcode post_item_path(item.post_id, item.id), 4 %>
     </div>
-  <% end %>
+    <p class="px-2" style="font-size: 0.8em"><%= item.id %></p>
+  </div>
+<% end %>
 
 <!--
 <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-1 mt-3">
   <% @post.items.each do |item| %>
     <div class="d-inline">
-      <%= image_tag qrcode_tag post_item_path(item.post_id, item.id) %>
+      <%#= image_tag qrcode_tag post_item_path(item.post_id, item.id) %>
       <p style="font-size: 0.8em"><%= item.id %></p>
     </div>
 

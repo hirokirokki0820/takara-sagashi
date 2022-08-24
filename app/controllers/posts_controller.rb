@@ -46,7 +46,7 @@ class PostsController < ApplicationController
   # DELETE /posts/1 or /posts/1.json
   def destroy
     @post.destroy
-    redirect_to posts_url, notice: "イベントが削除されました", status: :see_other
+    redirect_to current_user, notice: "イベントが削除されました", status: :see_other
   end
 
   # QRコードを表示・印刷する
