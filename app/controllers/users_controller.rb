@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy ]
-  before_action :require_verified_account, only: %i[ edit update destroy ]
+  before_action :set_user, only: %i[ show edit update destroy show_qrcode ]
+  before_action :require_verified_account, only: %i[ edit update destroy show_qrcode ]
   before_action :require_same_user, only: %i[ show edit update destroy ]
   before_action :require_user, only: %i[ index ]
   before_action :user_got_items, only: %i[ show ]
@@ -60,6 +60,9 @@ class UsersController < ApplicationController
     end
   end
 
+  def show_qrcode
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -75,7 +78,7 @@ class UsersController < ApplicationController
     # ゲストユーザーに対する制限（編集・削除の禁止）
     def require_verified_account
       if @user.guest == true || @user.guest == 1
-        redirect_to @user, alert: "ゲストアカウントの編集・削除はできません"
+        redirect_to @user
       end
     end
 
