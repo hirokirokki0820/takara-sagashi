@@ -2,13 +2,19 @@
 <%= form_with(scope: :session, model: @user, url: login_path, local: true, id: "sessionForm") do |f| %>
 
   <div class="mb-3 col-8">
-    <%= icon("person-circle") %> <%= f.label "アカウント名", for: "sessionName", class: "form-label fw-bold" %>
-    <%= f.text_field :name, class: "form-control", id: "sessionName", placeholder: "アカウント名を入力してください"%>
+    <%= icon("person-circle") %> <%= f.label "アカウント名", for: "sessionName", class: "form-label required" %>
+    <%= f.text_field :name, class: "form-control", id: "sessionName"%>
   </div>
 
-  <div class="mb-4 col-8">
-    <%= icon("key-fill") %> <%= f.label "パスワード", for: "userPassword", class: "form-label fw-bold" %>
-    <%= f.password_field :password, class: "form-control", id: "sessionPassword", placeholder: "パスワードを入力してください"%>
+  <div class="mb-3 col-8">
+    <%= icon("key-fill") %> <%= f.label "パスワード", for: "userPassword", class: "form-label required" %>
+    <%= f.password_field :password, class: "form-control", id: "sessionPassword"%>
+  </div>
+
+  <div class="form-check mb-4">
+    <%= f.check_box :remember_me, class: "form-check-input", id: "loginCheck" ,as: :boolean %>
+    <%= f.label "ログイン状態を保持する", class: "form-check-label", for: "loginCheck" %>
+    </label>
   </div>
 
   <div class="mb-3">

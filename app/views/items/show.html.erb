@@ -1,9 +1,5 @@
 <% if @item.post.user == current_user %>
-  <!-- イベント作成者用の表示画面 -->
-  <div class="mb-3">
-    <%= link_to icon_with_text("box-arrow-in-left", "アイテム一覧に戻る"), @item.post, class: "" %>
-  </div>
-  <hr>
+  <!-- イベント主催者用の表示画面 -->
   <h2 class="mb-4">アイテム詳細</h2>
   <div class="mb-5">
     <p><b>品名:  </b><%= @item.name %></p>
@@ -18,6 +14,10 @@
       <% end %>
     </p>
     <p><b>獲得者 ID:  </b><%= @item.item_got_user if !@item.item_got_user.nil? %></p>
+  </div>
+
+  <div class="mb-3">
+    <%= link_to icon_with_text("box-arrow-in-left", "アイテム一覧に戻る"), @item.post, class: "" %>
   </div>
 
   <hr>

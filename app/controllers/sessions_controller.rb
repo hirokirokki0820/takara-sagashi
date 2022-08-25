@@ -3,9 +3,10 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(name: session_params[:name])
+    @user = User.find_by(name: session_params[:name].downcase)
     if @user && @user.authenticate(session_params[:password])
       log_in @user
+      session_params[:remember_me] == "1" ? remember(@user) : forget(@user)
       flash[:notice] = "ログインしました"
       redirect_to @user
     else
@@ -22,6 +23,6 @@ class SessionsController < ApplicationController
 
   private
     def session_params
-      params.require(:session).permit(:name, :password)
+      params.require(:session).permit(:name, :password, :remember_me)
     end
 end

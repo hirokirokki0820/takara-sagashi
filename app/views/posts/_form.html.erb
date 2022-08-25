@@ -1,7 +1,7 @@
 <%= form_with(model: post, local: true, id: "postForm") do |f| %>
 
   <div class="mb-5 col-8 <%= post.errors.include?(:title) ? "validation_errors" : "" %>">
-    <%= icon("pencil-fill") %> <%= f.label "イベント名", for: "postName", class: "form-label" %>
+    <%= icon("pencil-fill") %> <%= f.label "イベント名", for: "postName", class: "form-label required" %>
     <%= f.text_field :title, class: "form-control", id: "postName"%>
     <%= render 'layouts/error_messages',class: "invalid-feedback", obj: post, key: :title %>
   </div>
@@ -18,6 +18,25 @@
 <% if !@post.new_record? %>
   <hr class="mt-5">
   <div class="mb-5">
-    <%= link_to icon_with_text("trash", "イベントを削除する"), @post, class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？"} %>
+    <a class="btn btn-danger" href="#" data-bs-toggle="modal" data-bs-target="#postModal"><%= icon_with_text("trash", "イベントを削除する") %></a>
+  </div>
+
+  <!-- 「削除ボタン」のモーダル -->
+  <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="postModalLabel">確認</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          本当に削除しますか？
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+          <%= link_to icon_with_text("trash", "削除"), @post, class: "btn btn-danger", data: { turbo_method: :delete } %>
+        </div>
+      </div>
+    </div>
   </div>
 <% end %>

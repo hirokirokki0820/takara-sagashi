@@ -21,7 +21,12 @@ h1 {
   margin-bottom: 20px;
 }
 
-/****** フォームのスタイル ******/
+/*************** フォームのスタイル ***************/
+// ラベルのフォントを太字にする
+.form-label {
+  font-weight: bold;
+}
+
 // エラー時の入力フォームのスタイリング
 .validation_errors {
   input {
@@ -30,12 +35,12 @@ h1 {
 }
 
 //入力フォーム必須項目のラベルに「*」マークを付ける
-label.required:after{
-  content:" *";
+.required:after {
   color: red;
+  content:" *";
 }
 
-/****** ハンバーガーメニューのスタイリング ******/
+/********* ハンバーガーメニューのスタイリング *********/
 .navbar-toggler{
   border: none !important;
 
@@ -53,7 +58,7 @@ label.required:after{
   }
 }
 
-/****** ボタンデザイン（Large, Medium） ******/
+/********* ボタンデザイン（Large, Medium） *********/
 // Largeボタン（ベーシック）
 .btn__basic__l{
   margin: 0 auto;
@@ -131,7 +136,7 @@ label.required:after{
   background: linear-gradient(to bottom,  #EE6E73 0%,#ff5c61 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
-/****** 見出しのデザイン ******/
+/*************** 見出しのデザイン ***************/
 // @item.name(景品名)の見出しデザイン（高級感のある見出し）
 .item__name__gold{
   font-family: 'ヒラギノ明朝 Pro W3', 'Hiragino Mincho Pro', 'Hiragino Mincho ProN', 'HGS明朝E', 'ＭＳ Ｐ明朝', serif;
@@ -178,7 +183,7 @@ label.required:after{
   border: 3px solid red;
 }
 
-/****** カメラ起動ボタンのデザイン ******/
+/************ カメラ起動ボタンのデザイン ************/
 #camera__start {
 
   label {

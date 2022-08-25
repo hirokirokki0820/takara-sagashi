@@ -1,7 +1,7 @@
 <%= form_with(model: [@post, @item], local: true, id: "itemForm") do |f| %>
 
   <div class="mb-3 col-8 <%= @item.errors.include?(:name) ? "validation_errors" : "" %>">
-    <%= icon("pencil-fill") %> <%= f.label "アイテム名", for: "postName", class: "form-label" %>
+    <%= icon("pencil-fill") %> <%= f.label "アイテム名", for: "postName", class: "form-label required" %>
     <%= f.text_field :name, class: "form-control", id: "itemName" %>
     <%= render 'layouts/error_messages',class: "invalid-feedback", obj: @item, key: :name %>
   </div>
@@ -16,7 +16,7 @@
     <%= f.submit class: "btn__basic__m btn__green" %>
   </div>
   <div class="mb-5 col-8">
-    <%= link_to "キャンセル", @post, class: "btn__basic__m" %>
+    <%= link_to "キャンセル", @item.new_record? ? @post : post_item_path(@item.post_id, @item.id), class: "btn__basic__m" %>
   </div>
 
 <% end %>
@@ -25,7 +25,26 @@
 <% if !@item.new_record? %>
   <hr>
   <div class="mb-5">
-    <%= link_to icon_with_text("trash", "アイテムを削除する"), post_item_path(@item.post_id, @item.id), class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？"} %>
+    <a class="btn btn-danger" href="#" data-bs-toggle="modal" data-bs-target="#itemModal"><%= icon_with_text("trash", "アイテムを削除する") %></a>
+  </div>
+
+  <!-- 「削除ボタン」のモーダル -->
+  <div class="modal fade" id="itemModal" tabindex="-1" aria-labelledby="itemModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="itemModalLabel">確認</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          本当に削除しますか？
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+          <%= link_to icon_with_text("trash", "削除"), post_item_path(@item.post_id, @item.id), class: "btn btn-danger", data: { turbo_method: :delete } %>
+        </div>
+      </div>
+    </div>
   </div>
 <% end %>
 

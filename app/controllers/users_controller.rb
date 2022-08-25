@@ -55,6 +55,7 @@ class UsersController < ApplicationController
     else
       user = User.guest_login
       log_in user
+      remember(user)
       redirect_to user, notice: "イベントに参加しました"
     end
   end
