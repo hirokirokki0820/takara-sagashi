@@ -1,0 +1,12 @@
+<%# `#items`の先頭に登録されたitemを追加する %>
+<%= turbo_stream.prepend "items", @item %>
+
+<%# 登録の入力フォームの中身を空にする %>
+<%= turbo_stream.update Item.new, "" %>
+
+<%# 景品一覧のカウント（累計・ハズレ数）を更新する %>
+<%= turbo_stream.update "item-total-count", @post.items.count %>
+<%= turbo_stream.update "item-lose-count", @post.items.where(lose: true).count %>
+
+<%# Flashを表示 %>
+<%= turbo_stream_flash %>

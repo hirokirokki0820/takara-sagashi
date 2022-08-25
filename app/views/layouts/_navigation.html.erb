@@ -54,21 +54,24 @@
         <h5 class="modal-title" id="exampleModalLabel">確認</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <% if !current_user.guest? %>
-        <div class="modal-body">
-          本当にログアウトしますか？
-        </div>
-      <% else %>
-        <div class="modal-body">
-          一度退出すると再ログインできません。<br>
-          景品交換前に退出されますと、<span class="text-danger">獲得した景品情報は全て失われるため景品交換ができなくなります。</span>
-          本当によろしいですか？
+      <% if logged_in?%>
+        <% if !current_user.guest? %>
+          <div class="modal-body">
+            本当にログアウトしますか？
+          </div>
+        <% else %>
+          <div class="modal-body">
+            一度退出すると再ログインできません。<br>
+            景品交換前に退出されますと、<span class="text-danger">獲得した景品情報は全て失われるため景品交換ができなくなります。</span>
+            本当によろしいですか？
+          </div>
+        <% end %>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+          <%= button_to !current_user.guest? ? "ログアウト" : "退出する", logout_path, class: "btn btn-danger", method: :delete %>
         </div>
       <% end %>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
-        <%= button_to !current_user.guest? ? "ログアウト" : "退出する", logout_path, class: "btn btn-danger", method: :delete %>
-      </div>
     </div>
   </div>
 </div>

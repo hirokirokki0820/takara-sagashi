@@ -1,12 +1,28 @@
-<div id="<%= dom_id item %>">
-  <p>
-    <strong>Name:</strong>
-    <%= item.name %>
-  </p>
-
-  <p>
-    <strong>Activated:</strong>
-    <%= item.activated %>
-  </p>
-
-</div>
+<!-- <div id="<%= dom_id item %>"> -->
+<%= turbo_frame_tag item do %>
+  <div class="row">
+    <%# 「ハズレ」を非表示にする %>
+    <%# if !item.lose? %>
+      <!-- No. -->
+      <div class="col-3 mt-auto">
+        <%= item.item_number %>
+        <%#= item.lose? ? icon("dash-lg") : item.id %>
+      </div>
+      <%# アイテム名 %>
+      <div class="col-6 mt-auto">
+        <%= link_to item.name, post_item_path(item.post_id, item.id), data: { turbo_frame: item } %>
+      </div>
+      <%# 在庫 %>
+      <div class="col-3 mt-auto">
+        <% if item.item_got_user.nil? && !item.lose? %>
+          <span class="text-success fw-bold"><%= icon("circle") %></span>
+        <% elsif item.lose? %>
+          <span class="fw-bold"><%= icon("dash-lg") %></span>
+        <% else %>
+          <span class="text-danger fw-bold"><%= icon("x") %></span>
+        <% end %>
+      </div>
+      <hr class="mt-2" style="border: 1px solid #ccc">
+    <%# end %>
+  </div>
+<% end %>

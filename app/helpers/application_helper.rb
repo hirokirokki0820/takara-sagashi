@@ -42,4 +42,9 @@ module ApplicationHelper
     tag.span(icon(icon_name), class: "me-2") + tag.span(text)
   end
 
+  # turbo_streamを用いたFlashメッセージ
+  def turbo_stream_flash
+    turbo_stream.update "flash", partial: "layouts/flash_messages"
+  end
+
 end

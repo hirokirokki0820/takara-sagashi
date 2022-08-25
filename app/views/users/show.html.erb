@@ -18,7 +18,7 @@
     <div class="card-body mx-3">
       <div class="row py-2">
         <div class="col-4 mt-auto fw-bold">
-          No.
+          景品No.
         </div>
         <div class="col-8 mt-auto fw-bold">
           景品名
@@ -26,9 +26,9 @@
         <hr class="mt-2">
       </div>
       <div class="row">
-        <% @got_items.each_with_index do |item, index| %>
+        <% @got_items.each do |item| %>
           <div class="col-4 mt-auto">
-            <%= index + 1 %>
+            <%= item.item_number %>
           </div>
           <div class="col-8 mt-auto">
             <%= link_to item.name, post_item_path(item.post_id, item.id) %>
@@ -112,6 +112,6 @@
 
   <hr>
   <div class="mb-5 text-center">
-    <%= link_to icon_with_text("qr-code","参加者ログイン用のQRコードを表示"), show_qrcode_user_path(@user), class: "btn__basic__l"%>
+    <%= link_to icon_with_text("qr-code","参加者ログイン用のQRコードを表示"), show_qrcode_user_path(@user), class: "btn__basic__l btn__w80"%>
   </div>
 <% end %>

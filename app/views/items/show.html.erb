@@ -1,30 +1,34 @@
 <% if @item.post.user == current_user %>
   <!-- イベント主催者用の表示画面 -->
-  <h2 class="mb-4">景品情報</h2>
-  <div class="mb-5">
-    <p><b>景品名:  </b><%= @item.name %></p>
-    <p><b>ID: </b><%= @item.id %></p>
-    <p><b>在庫:  </b>
-      <% if @item.item_got_user.nil? && !@item.lose? %>
-        <span class="text-success fw-bold"><%= icon("circle") %></span>
-      <% elsif @item.lose? %>
-        <span class="fw-bold"><%= icon("dash-lg") %></span>
-      <% else %>
-        <span class="text-danger fw-bold"><%#= icon("x-lg") %>❌</span>
-      <% end %>
-    </p>
-    <p><b>獲得者 ID:  </b><%= @item.item_got_user if !@item.item_got_user.nil? %></p>
-  </div>
+  <%= turbo_frame_tag @item do %>
+    <div class="mb-3">
+      <p><b>景品No. </b><%= @item.item_number %></p>
+      <p><b>景品名:  </b><%= @item.name %></p>
+      <p><b>ID: </b><%= @item.id %></p>
+      <p><b>在庫:  </b>
+        <% if @item.item_got_user.nil? && !@item.lose? %>
+          <span class="text-success fw-bold"><%= icon("circle") %></span>
+        <% elsif @item.lose? %>
+          <span class="fw-bold"><%= icon("dash-lg") %></span>
+        <% else %>
+          <span class="text-danger fw-bold"><%#= icon("x-lg") %>❌</span>
+        <% end %>
+      </p>
+      <p><b>獲得者 ID:  </b><%= @item.item_got_user if !@item.item_got_user.nil? %></p>
+    </div>
 
-  <div class="mb-3">
-    <%= link_to icon_with_text("box-arrow-in-left", "景品一覧に戻る"), @item.post, class: "" %>
-  </div>
-
-  <hr>
-  <div class="mb-3">
-    <%= link_to icon_with_text("pencil-square", "景品情報を編集する"), edit_post_item_path(@item.post_id, @item.id), class: "btn btn-primary" %>
-  </div>
-
+    <div class="mb-3">
+        <%= link_to icon_with_text("caret-up-fill", "閉じる"), @item.post, class: "btn__basic__l" %>
+    </div>
+    <div class="mb-4 row">
+      <div class="col-8">
+        <%= link_to icon_with_text("pencil-square", "景品情報を編集する"), edit_post_item_path(@item.post_id, @item.id), class: "btn__basic__m btn__green", data: { turbo_frame: @item } %>
+      </div>
+      <div class="col-4">
+        <%= link_to icon_with_text("trash", "削除"), post_item_path(@item.post_id, @item.id), class: "btn__basic__m btn__red", data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
+      </div>
+    </div>
+  <% end %>
 <% else %>
   <!-- 参加者用の表示画面 -->
   <div class="mb-5 text-center">
@@ -42,6 +46,7 @@
         </div>
       <% else %>
         <p>🎉おめでとうございます！！🎉</p>
+        <p>景品No. <b><%= @item.item_number %></b></p>
         <div class="mb-3">
           <h3 class="fw-bold item__name__gold"><%= @item.name %></h3>
         </div>

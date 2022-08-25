@@ -1,62 +1,46 @@
-<%= form_with(model: [@post, @item], local: true, id: "itemForm") do |f| %>
+<%= turbo_frame_tag @item do %>
+  <%= form_with(model: [@post, @item], local: true, id: "itemForm") do |f| %>
 
-  <div class="mb-3 col-8 <%= @item.errors.include?(:name) ? "validation_errors" : "" %>">
-    <%= icon("pencil-fill") %> <%= f.label "景品名", for: "postName", class: "form-label required" %>
-    <%= f.text_field :name, class: "form-control", id: "itemName" %>
-    <%= render 'layouts/error_messages',class: "invalid-feedback", obj: @item, key: :name %>
-  </div>
+    <div class="mb-3 <%= @item.errors.include?(:name) ? "validation_errors" : "" %>">
+      <%= icon("pencil-fill") %> <%= f.label "景品名", for: "postName", class: "form-label required" %>
+      <%= f.text_field :name, class: "form-control", id: "itemName" %>
+      <%= render 'layouts/error_messages',class: "invalid-feedback", obj: @item, key: :name %>
+    </div>
 
-  <div class="form-check mb-4">
-    <%= f.check_box :lose, class: "form-check-input", id: "itemLoseCheck" ,as: :boolean %>
-    <%= f.label "ハズレを設定する", class: "form-check-label", for: "itemLoseCheck" %>
-    </label>
-  </div>
+    <div class="form-check mb-3">
+      <%= f.check_box :lose, class: "form-check-input", id: "itemLoseCheck" ,as: :boolean %>
+      <%= f.label "ハズレを設定する", class: "form-check-label", for: "itemLoseCheck" %>
+      </label>
+    </div>
 
-  <div class="mb-3 col-8">
-    <%= f.submit class: "btn__basic__m btn__green" %>
-  </div>
-  <div class="mb-5 col-8">
-    <%= link_to "キャンセル", @item.new_record? ? @post : post_item_path(@item.post_id, @item.id), class: "btn__basic__m" %>
-  </div>
-
-<% end %>
-
-<!-- アイテム編集時に「削除ボタン」を表示する  -->
-<% if !@item.new_record? %>
-  <hr>
-  <div class="mb-5">
-    <a class="btn btn-danger" href="#" data-bs-toggle="modal" data-bs-target="#itemModal"><%= icon_with_text("trash", "景品を削除する") %></a>
-  </div>
-
-  <!-- 「削除ボタン」のモーダル -->
-  <div class="modal fade" id="itemModal" tabindex="-1" aria-labelledby="itemModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="itemModalLabel">確認</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          本当に削除しますか？
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
-          <%= link_to icon_with_text("trash", "削除"), post_item_path(@item.post_id, @item.id), class: "btn btn-danger", data: { turbo_method: :delete } %>
-        </div>
+    <div class="mb-3 row">
+      <div class="col-6">
+        <%= f.submit class: "btn__basic__m btn__green" %>
+      </div>
+      <div class="col-6">
+        <%= link_to "キャンセル", @item.new_record? ? @post : post_item_path(@item.post_id, @item.id), class: "btn__basic__m" %>
       </div>
     </div>
-  </div>
+  <% end %>
+
+  <script>
+    var itemNameInput = document.querySelector("#itemName");
+    var itemLoseCheckBox = document.querySelector("#itemLoseCheck");
+
+    itemLoseCheckBox.addEventListener("change", function(){
+      if(this.checked === true){
+        itemNameInput.value = "ハズレ";
+      }else{
+        itemNameInput.value = "";
+      }
+    });
+
+    itemNameInput.addEventListener("input", function(){
+      if(this.value === "ハズレ"){
+        itemLoseCheckBox.checked = true;
+      }else{
+        itemLoseCheckBox.checked = false;
+      }
+    });
+  </script>
 <% end %>
-
-<script>
-  var itemNameInput = document.querySelector("#itemName");
-  var itemLoseCheckBox = document.querySelector("#itemLoseCheck");
-
-  itemLoseCheckBox.addEventListener("change", function(){
-    if(this.checked === true){
-      itemNameInput.value = "ハズレ";
-    }else{
-      itemNameInput.value = "";
-    }
-  });
-</script>
