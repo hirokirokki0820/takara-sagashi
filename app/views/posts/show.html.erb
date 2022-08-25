@@ -17,7 +17,7 @@
     <%= search_form_for @search, url: post_path(@post) do |f| %>
       <div class="row g3 mb-3">
         <div class="col-4 col-xl-2">
-          <%= f.label :name_cont, "アイテム名", class: "form-label fw-bold" %>
+          <%= f.label :name_cont, "景品名", class: "form-label fw-bold" %>
           <%= f.search_field :name_cont, class: "form-control" %>
         </div>
         <div class="col-4 col-xl-2">
@@ -39,13 +39,13 @@
 <!-- アイテム一覧 -->
 <div class="card shadow mt-3 mb-5">
   <div class="card-header">
-    <%= icon_with_text("table", "アイテム一覧") %>
+    <%= icon_with_text("table", "景品一覧") %>
     (累計: <span class="fw-bold text-danger"><%= @post.items.count %></span>, ハズレ数: <span class="fw-bold text-danger"><%= @post.items.where(lose: true).count %></span>)
   </div>
 
   <div class="card-body mx-3">
 
-    <%= link_to icon_with_text("plus-circle", "アイテムを追加"),
+    <%= link_to icon_with_text("plus-circle", "景品を追加"),
                     new_post_item_path(@post),
                     class: "btn__basic__m btn__green mb-3 mt-1"
     %>
@@ -55,7 +55,7 @@
         No.
       </div>
       <div class="col-7 mt-auto fw-bold">
-        <%= sort_link(@search, :name, hide_indicator: true) %>
+        <%= sort_link(@search, :name, "景品名", hide_indicator: true) %>
       </div>
       <div class="col-3 mt-auto fw-bold">
         <%= sort_link(@search, :item_got_user, "在庫", hide_indicator: true) %>
@@ -102,7 +102,7 @@
 </div>
 
 <div class="mb-5 text-center">
-  <a class="btn__basic__l" href="#" data-bs-toggle="modal" data-bs-target="#itemReset">アイテムの在庫をリセットする</a>
+  <a class="btn__basic__l" href="#" data-bs-toggle="modal" data-bs-target="#itemReset">景品の在庫をリセットする</a>
   <%#= link_to "アイテムの在庫をリセットする", activation_reset_post_path(@post), class: "btn__basic__l" %>
 </div>
 

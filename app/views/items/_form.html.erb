@@ -1,7 +1,7 @@
 <%= form_with(model: [@post, @item], local: true, id: "itemForm") do |f| %>
 
   <div class="mb-3 col-8 <%= @item.errors.include?(:name) ? "validation_errors" : "" %>">
-    <%= icon("pencil-fill") %> <%= f.label "アイテム名", for: "postName", class: "form-label required" %>
+    <%= icon("pencil-fill") %> <%= f.label "景品名", for: "postName", class: "form-label required" %>
     <%= f.text_field :name, class: "form-control", id: "itemName" %>
     <%= render 'layouts/error_messages',class: "invalid-feedback", obj: @item, key: :name %>
   </div>
@@ -25,7 +25,7 @@
 <% if !@item.new_record? %>
   <hr>
   <div class="mb-5">
-    <a class="btn btn-danger" href="#" data-bs-toggle="modal" data-bs-target="#itemModal"><%= icon_with_text("trash", "アイテムを削除する") %></a>
+    <a class="btn btn-danger" href="#" data-bs-toggle="modal" data-bs-target="#itemModal"><%= icon_with_text("trash", "景品を削除する") %></a>
   </div>
 
   <!-- 「削除ボタン」のモーダル -->

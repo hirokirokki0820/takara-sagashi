@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy show_qrcode ]
-  before_action :require_verified_account, only: %i[ edit update destroy show_qrcode ]
-  before_action :require_same_user, only: %i[ show edit update destroy ]
+  before_action :require_verified_account, only: %i[ edit update destroy ]
+  before_action :require_same_user, only: %i[ show edit update destroy show_qrcode ]
   before_action :require_user, only: %i[ index ]
   before_action :user_got_items, only: %i[ show ]
 

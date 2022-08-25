@@ -1,8 +1,8 @@
 <% if @item.post.user == current_user %>
   <!-- イベント主催者用の表示画面 -->
-  <h2 class="mb-4">アイテム詳細</h2>
+  <h2 class="mb-4">景品情報</h2>
   <div class="mb-5">
-    <p><b>品名:  </b><%= @item.name %></p>
+    <p><b>景品名:  </b><%= @item.name %></p>
     <p><b>ID: </b><%= @item.id %></p>
     <p><b>在庫:  </b>
       <% if @item.item_got_user.nil? && !@item.lose? %>
@@ -17,12 +17,12 @@
   </div>
 
   <div class="mb-3">
-    <%= link_to icon_with_text("box-arrow-in-left", "アイテム一覧に戻る"), @item.post, class: "" %>
+    <%= link_to icon_with_text("box-arrow-in-left", "景品一覧に戻る"), @item.post, class: "" %>
   </div>
 
   <hr>
   <div class="mb-3">
-    <%= link_to icon_with_text("pencil-square", "アイテムを編集する"), edit_post_item_path(@item.post_id, @item.id), class: "btn btn-primary" %>
+    <%= link_to icon_with_text("pencil-square", "景品情報を編集する"), edit_post_item_path(@item.post_id, @item.id), class: "btn btn-primary" %>
   </div>
 
 <% else %>
@@ -47,7 +47,7 @@
         </div>
         <p>が当たりました！！</p>
         <div class="d-inline-block text-start">
-          <p class="py-2 px-3 mt-1 text-bg-light"><%= icon_with_text("qr-code", "ID: ") %><span class=" fw-bold text-danger"><%= @item.id %></span></p>
+          <p class="py-2 px-3 mt-1 text-bg-light"><%= icon_with_text("qr-code", "景品ID: ") %><span class=" fw-bold text-danger"><%= @item.id %></span></p>
           <p class="py-2 px-3 mt-1 text-bg-light"><%= icon_with_text("person-circle", "獲得者ID: ") %><span class=" fw-bold text-danger"><%= @item.item_got_user %></span></p>
         </div>
       <% end %>
