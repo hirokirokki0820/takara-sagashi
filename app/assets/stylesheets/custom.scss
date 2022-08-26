@@ -209,30 +209,3 @@ h1 {
     display: none;
   }
 }
-
-/************ QRコードリーダー起動時の画面 ************/
-#loadingMessage {
-  text-align: center;
-  padding: 40px;
-  background-color: #eee;
-}
-
-#canvas {
-  width: 100%;
-}
-
-#output {
-  margin-top: 20px;
-  background: #eee;
-  padding: 10px;
-  padding-bottom: 0;
-}
-
-#output div {
-  padding-bottom: 10px;
-  word-wrap: break-word;
-}
-
-#noQRFound {
-  text-align: center;
-}
