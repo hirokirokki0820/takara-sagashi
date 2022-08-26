@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :users, except: [:new] do
     member do
       get "show_qrcode"
+      get "open_qr_reader"
     end
   end
   resources :posts do

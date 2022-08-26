@@ -43,6 +43,7 @@
 
 <div id="qrCodeReader" class="mb-4 text-center">
   <a href="" class="btn__basic__l btn__w80 btn__green" id="qrCodeAppLink"><%= icon_with_text("qr-code", "QRコードリーダーを起動する") %></a>
+  <%= link_to icon_with_text("qr-code", "QRコードリーダーを起動する"), open_qr_reader_user_path(@user), class: "btn__basic__l btn__w80 btn__green" %>
   <!--<input id="camera" type="file" name="image" accept="image/*" capture>-->
 </div>
 

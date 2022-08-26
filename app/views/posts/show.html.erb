@@ -19,8 +19,8 @@
           html: {
             data: {
               turbo_frame: "item-list",
-              controller: "form",
-              action: "input->form#submit"
+              controller: "search",
+              action: "input->search#submit"
                }
           } do |f| %>
       <div class="row g3 mb-3">
@@ -65,7 +65,7 @@
     <%= turbo_frame_tag "item-list" do %>
       <div class="row py-2">
         <div class="col-3 mt-auto fw-bold">
-          No.
+          <%= sort_link(@search, :item_number, "No.", hide_indicator: true) %>
         </div>
         <div class="col-6 mt-auto fw-bold">
           <%= sort_link(@search, :name, "景品名", hide_indicator: true) %>

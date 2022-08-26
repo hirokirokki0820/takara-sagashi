@@ -1,25 +1,31 @@
 <%= form_with(model: user, local: true, class: "row", id: "userForm") do |f| %>
 
-  <div class="mb-3 col-8 <%= user.errors.include?(:name) ? "validation_errors" : "" %>">
+  <div class="mb-3 col-10 <%= user.errors.include?(:name) ? "validation_errors" : "" %>" id="userNameField">
     <%= icon("person-circle") %> <%= f.label "アカウント名(半角英数字)", for: "userName", class: "form-label required" %>
     <%= f.text_field :name, class: "form-control", id: "userName", placeholder: "アカウント名を入力してください" %>
+    <%#= f.text_field :name, class: "form-control", id: "userName", placeholder: "アカウント名を入力してください", data: { controller: "form", action: "input->form#userName"} %>
     <%= render 'layouts/error_messages',class: "invalid-feedback", obj: user, key: :name %>
+    <span class="mt-1" id="userError"></span>
   </div>
 
-  <div class="mb-3 col-8 <%= user.errors.include?(:password) ? "validation_errors" : "" %>">
-    <%= icon("key-fill") %> <%= f.label "パスワード", for: "userPassword", class: "form-label required" %>
-    <%= f.password_field :password, class: "form-control", id: "userPassword", placeholder: "パスワードを入力してください" %>
-    <%= render 'layouts/error_messages',class: "invalid-feedback", obj: user, key: :password %>
-  </div>
+  <div id="userPasswordGroup">
+    <div class="mb-3 col-10 <%= user.errors.include?(:password) ? "validation_errors" : "" %>" id="userPasswordField">
+      <%= icon("key-fill") %> <%= f.label "パスワード", for: "userPassword", class: "form-label required" %>
+      <%= f.password_field :password, class: "form-control", id: "userPassword", placeholder: "パスワードを入力してください" %>
+      <%= render 'layouts/error_messages',class: "invalid-feedback", obj: user, key: :password %>
+      <p id="passwordError"></p>
+    </div>
 
-  <div class="mb-4 col-8 <%= user.errors.include?(:name) ? "validation_errors" : "" %>">
-    <%= icon("key-fill") %> <%= f.label "パスワード(確認用)", for: "userPasswordConfirmation", class: "form-label required" %>
-    <%= f.password_field :password_confirmation, class: "form-control", id: "userPasswordConfirmation", placeholder: "パスワードをもう一度入力してください" %>
-    <%= render 'layouts/error_messages',class: "invalid-feedback", obj: user, key: :password_confirmation %>
+    <div class="mb-4 col-10 <%= user.errors.include?(:name) ? "validation_errors" : "" %>" id="userPasswordField">
+      <%= icon("key-fill") %> <%= f.label "パスワード(確認用)", for: "userPasswordConfirmation", class: "form-label required" %>
+      <%= f.password_field :password_confirmation, class: "form-control", id: "userPasswordConfirmation", placeholder: "パスワードをもう一度入力してください" %>
+      <%= render 'layouts/error_messages',class: "invalid-feedback", obj: user, key: :password_confirmation %>
+      <p id="passwordConfirmationError"></p>
+    </div>
   </div>
 
   <div class="mb-3">
-    <%= f.submit class: "btn__basic__m btn__green" %>
+    <%= f.submit class: "btn__basic__m btn__green", id: "userSubmit" %>
   </div>
   <div class="mb-5">
     <%= link_to "キャンセル", (user.new_record? ? host_user_path : current_user), class: "btn__basic__m" %>
