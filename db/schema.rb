@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_25_112516) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_26_015856) do
   create_table "items", id: :string, force: :cascade do |t|
     t.string "name"
     t.string "post_id"
@@ -20,7 +20,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_25_112516) do
     t.boolean "lose", default: false, null: false
     t.string "item_got_user"
     t.string "item_state"
-    t.integer "item_number"
+    t.string "item_number"
     t.index ["post_id"], name: "index_items_on_post_id"
   end
 

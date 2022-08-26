@@ -14,8 +14,20 @@
   </div>
 
   <div class="card-body">
-    <%= search_form_for @search, url: post_path(@post), html: {data: { turbo_frame: "item-list" } } do |f| %>
+    <%= search_form_for @search,
+          url: post_path(@post),
+          html: {
+            data: {
+              turbo_frame: "item-list",
+              controller: "form",
+              action: "input->form#submit"
+               }
+          } do |f| %>
       <div class="row g3 mb-3">
+        <div class="col-4 col-xl-2">
+          <%= f.label :item_number_start, "番号", class: "form-label fw-bold" %>
+          <%= f.search_field :item_number_start, class: "form-control" %>
+        </div>
         <div class="col-4 col-xl-2">
           <%= f.label :name_cont, "景品名", class: "form-label fw-bold" %>
           <%= f.search_field :name_cont, class: "form-control" %>
@@ -24,12 +36,10 @@
           <%= f.label :item_state_eq, "在庫", class: "form-label fw-bold" %>
           <%= f.select :item_state_eq, [['あり ◯', "exist" ], ['なし x', "taken"]],
  {include_blank: '選択なし'} ,class: 'form-select' %>
-
         </div>
-        <div class="col-4 d-flex align-items-end">
-          <%= button_tag(icon_with_text("search", "検索"), class: "btn btn-primary me-1") %>
-          <%= link_to "リセット", post_path(@post), class: "btn btn-outline-secondary" %>
-        </div>
+      </div>
+      <div class="">
+        <%= link_to "リセット", post_path(@post), class: "btn btn-outline-secondary d-block" %>
       </div>
     <% end %>
   </div>

@@ -16,7 +16,7 @@ class Item < ApplicationRecord
     def set_item_number
       post = self.post
       while self.item_number.blank? || post.items.find_by(item_number: self.item_number).present? do
-        self.item_number = rand(1..9999)
+        self.item_number = rand(1..9999).to_s
       end
     end
 end

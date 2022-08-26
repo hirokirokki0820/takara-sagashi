@@ -11,6 +11,7 @@ class PostsController < ApplicationController
   # GET /posts/1 or /posts/1.json
   def show
     @search = @post.items.ransack(params[:q])
+    @search.sorts = "created_at DESC" if @search.sorts.empty?
     @items = @search.result
   end
 
