@@ -59,6 +59,7 @@ class PostsController < ApplicationController
     @post.items.each do |item|
       if item.item_got_user? && !item.lose?
         item.update_attribute(:item_got_user, nil)
+        item.update_attribute(:item_state, "exist")
       end
     end
     redirect_to @post, notice: "景品の取得状態がリセットされました"
