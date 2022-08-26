@@ -12,7 +12,7 @@ class PostsController < ApplicationController
   def show
     @search = @post.items.ransack(params[:q])
     @search.sorts = "created_at DESC" if @search.sorts.empty?
-    @items = @search.result
+    @items = @search.result.page(params[:page])
   end
 
   # GET /posts/new
