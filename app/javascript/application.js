@@ -4,7 +4,7 @@ import "./controllers"
 import * as bootstrap from "bootstrap"
 
 // ES6 import
-import jsQR from "jsqr";
+// import jsQR from "jsqr";
 
 // CommonJS require
 const jsQR = require("jsqr");
